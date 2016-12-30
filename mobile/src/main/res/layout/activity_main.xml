@@ -10,16 +10,35 @@
         android:layout_height="match_parent"
        android:layout_above="@+id/rg_switch">
     </FrameLayout>
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/rg_switch"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <RadioButton
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <ImageView
+            android:focusable="true"
             android:layout_width="0dp"
-            android:background="@drawable/home_unselect"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:src="@drawable/btn_home_selector"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    </RadioGroup>
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/btn_media_selector"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/imageView" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/btn_care_selector"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/btn_mine_selector"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </RelativeLayout>
