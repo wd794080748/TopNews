@@ -10,35 +10,47 @@
         android:layout_height="match_parent"
        android:layout_above="@+id/rg_switch">
     </FrameLayout>
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/rg_switch"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="50dp">
-        <ImageView
+        <RadioButton
             android:focusable="true"
             android:layout_width="0dp"
-            android:src="@drawable/btn_home_selector"
+            android:drawableTop="@drawable/btn_home_selector"
             android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="首页"
             android:layout_weight="1" />
 
-        <ImageView
+        <RadioButton
             android:layout_width="0dp"
-            android:src="@drawable/btn_media_selector"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="视频"
+            android:drawableTop="@drawable/btn_media_selector"
             android:id="@+id/imageView" />
 
-        <ImageView
+        <RadioButton
             android:layout_width="0dp"
-            android:src="@drawable/btn_care_selector"
             android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="历史"
+            android:drawableTop="@drawable/btn_care_selector"
             android:layout_weight="1"/>
-        <ImageView
+        <RadioButton
             android:layout_width="0dp"
-            android:src="@drawable/btn_mine_selector"
             android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我的"
+            android:drawableTop="@drawable/btn_mine_selector"
             android:layout_weight="1"/>
-    </LinearLayout>
+    </RadioGroup>
 </RelativeLayout>
