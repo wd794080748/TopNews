@@ -3,14 +3,17 @@ package com.wangdong.topnews.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
+import com.wangdong.topnews.Adapter.FirstPageAdapter;
 import com.wangdong.topnews.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +28,7 @@ public class FirstPageFragment extends BaseFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private TableLayout tableLayout;
+    private TabLayout tabLayout;
     private ViewPager viewPager;
     private View view;
 
@@ -34,6 +37,9 @@ public class FirstPageFragment extends BaseFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private String[] titleName;
+    private ArrayList<Fragment> fragmentArrayList;
+    private FirstPageAdapter firstPageAdapter;
 
     public FirstPageFragment() {
         // Required empty public constructor
@@ -78,11 +84,30 @@ public class FirstPageFragment extends BaseFragment {
     }
 
     private void initData() {
-
+        titleName=new String[]{"推荐","社会","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
+       fragmentArrayList = new ArrayList<>();
+        for(int i=0;i<titleName.length;i++){
+        NewsFragment newsFragment=new NewsFragment();
+            fragmentArrayList.add(newsFragment);
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[0]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[1]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[2]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[3]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[4]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[5]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[6]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[7]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[8]));
+            tabLayout.addTab(tabLayout.newTab().setText(titleName[9]));
+            firstPageAdapter = new FirstPageAdapter(getActivity().getSupportFragmentManager(),titleName,fragmentArrayList);
+            viewPager.setAdapter(firstPageAdapter);
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 
     private void initView() {
-        tableLayout= (TableLayout) view.findViewById(R.id.tl_firstpage);
+        tabLayout= (TabLayout) view.findViewById(R.id.tl_firstpage);
         viewPager= (ViewPager) view.findViewById(R.id.vp_firstpage);
     }
 
