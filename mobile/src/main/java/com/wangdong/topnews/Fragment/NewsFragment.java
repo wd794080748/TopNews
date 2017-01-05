@@ -5,8 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wangdong.topnews.R;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
+import static com.wangdong.topnews.Constant.ID;
+import static com.wangdong.topnews.Constant.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,29 +25,19 @@ import com.wangdong.topnews.R;
  * create an instance of this fragment.
  */
 public class NewsFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    
     private String mParam1;
     private String mParam2;
+    private View view;
+    private String type;
 
 
     public NewsFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    
     public static NewsFragment newInstance(String param1, String param2) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
@@ -61,11 +59,50 @@ public class NewsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        if(view==null){
+            view=inflater.inflate(R.layout.fragment_news, container, false);
+        }
+        initView();
+        initData();
+        initListener();
+        return view;
     }
 
+    private void initListener() {
+    }
 
+    private void initView() {
+        
+    }
+
+    private void initData() {
+        Bundle arguments = getArguments();
+        type = arguments.getString("type");
+        RequestParams params = new RequestParams(URL);
+        params.addBodyParameter("body","type="+type+"&key="+ID);
+//        params.setBodyContent();
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 
 
 }

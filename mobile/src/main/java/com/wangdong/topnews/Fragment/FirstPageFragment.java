@@ -15,6 +15,9 @@ import com.wangdong.topnews.R;
 
 import java.util.ArrayList;
 
+import static com.wangdong.topnews.Constant.titleName;
+import static com.wangdong.topnews.Constant.titleTag;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -37,7 +40,6 @@ public class FirstPageFragment extends BaseFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private String[] titleName;
     private ArrayList<Fragment> fragmentArrayList;
     private FirstPageAdapter firstPageAdapter;
 
@@ -84,10 +86,12 @@ public class FirstPageFragment extends BaseFragment {
     }
 
     private void initData() {
-        titleName=new String[]{"推荐","社会","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
-       fragmentArrayList = new ArrayList<>();
+        fragmentArrayList = new ArrayList<>();
         for(int i=0;i<titleName.length;i++){
         NewsFragment newsFragment=new NewsFragment();
+            Bundle bundle=new Bundle();
+            bundle.putString("type",titleTag[i]);
+            newsFragment.setArguments(bundle);
             fragmentArrayList.add(newsFragment);
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
             tabLayout.addTab(tabLayout.newTab().setText(titleName[0]));
