@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.wangdong.topnews.R;
@@ -32,6 +33,7 @@ public class NewsFragment extends BaseFragment {
     private String mParam2;
     private View view;
     private String type;
+    private ListView lvNews;
 
 
     public NewsFragment() {
@@ -69,18 +71,19 @@ public class NewsFragment extends BaseFragment {
     }
 
     private void initListener() {
+
     }
 
     private void initView() {
-        
+        lvNews= (ListView) view.findViewById(R.id.lv_news);
     }
 
     private void initData() {
         Bundle arguments = getArguments();
         type = arguments.getString("type");
         RequestParams params = new RequestParams(URL);
-        params.addBodyParameter("body","type="+type+"&key="+ID);
-//        params.setBodyContent();
+        params.addBodyParameter("type",type);
+        params.addBodyParameter("key",ID);
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

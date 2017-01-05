@@ -5,9 +5,12 @@
     tools:context="com.wangdong.topnews.Fragment.NewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scrollbars="none">
+
+    </ListView>
 
 </FrameLayout>
