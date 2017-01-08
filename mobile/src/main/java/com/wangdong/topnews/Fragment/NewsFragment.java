@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.wangdong.topnews.Adapter.FirstPageListViewAdapter;
+import com.wangdong.topnews.Bean.NewsInfo;
 import com.wangdong.topnews.R;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
+
+import java.util.ArrayList;
 
 import static com.wangdong.topnews.Constant.ID;
 import static com.wangdong.topnews.Constant.URL;
@@ -34,6 +39,8 @@ public class NewsFragment extends BaseFragment {
     private View view;
     private String type;
     private ListView lvNews;
+    private ArrayList<NewsInfo.ResultBean.DataBean> dataBeanList;
+    private FirstPageListViewAdapter firstPageListViewAdapter;
 
 
     public NewsFragment() {
@@ -79,6 +86,7 @@ public class NewsFragment extends BaseFragment {
     }
 
     private void initData() {
+        dataBeanList =new ArrayList<NewsInfo.ResultBean.DataBean>();
         Bundle arguments = getArguments();
         type = arguments.getString("type");
         RequestParams params = new RequestParams(URL);
@@ -88,6 +96,10 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onSuccess(String result) {
                 Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+                Gson gson=new Gson();
+                NewsInfo newsInfo = gson.fromJson(result, NewsInfo.class);
+                dataBeanList.addAll(newsInfo.getResult().getData());
+                firstPageListViewAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -105,6 +117,8 @@ public class NewsFragment extends BaseFragment {
 
             }
         });
+        firstPageListViewAdapter = new FirstPageListViewAdapter(dataBeanList,getContext());
+        lvNews.setAdapter(firstPageListViewAdapter);
     }
 
 

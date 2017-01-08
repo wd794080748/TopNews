@@ -1,4 +1,4 @@
-package com.wangdong.topnews.Adapter.Bean;
+package com.wangdong.topnews.Bean;
 
 import java.util.List;
 
