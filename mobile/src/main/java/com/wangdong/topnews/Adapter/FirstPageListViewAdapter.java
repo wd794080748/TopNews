@@ -56,7 +56,7 @@ public class FirstPageListViewAdapter extends BaseAdapter {
                convertView=layoutInflater.inflate(R.layout.item_news_listview_1,null);
                viewHolder.tvAuthor= (TextView) convertView.findViewById(R.id.author);
                viewHolder.tvTime= (TextView) convertView.findViewById(R.id.time);
-               viewHolder.tvTitle= (TextView) convertView.findViewById(R.id.title_view);
+               viewHolder.tvTitle= (TextView) convertView.findViewById(R.id.tv_title);
                viewHolder.imageView1= (ImageView) convertView.findViewById(R.id.picture);
                convertView.setTag(viewHolder);
            }else {
@@ -65,13 +65,14 @@ public class FirstPageListViewAdapter extends BaseAdapter {
            viewHolder.tvTime.setText(arrayList.get(position).getDate()+" ");
            viewHolder.tvTitle.setText(arrayList.get(position).getTitle()+" ");
            x.image().bind(viewHolder.imageView1,arrayList.get(position).getThumbnail_pic_s());
-       }else {
+       }
+        else {
             ViewHolder viewHolder=null;
             if(convertView==null){
                 viewHolder=new ViewHolder();
                convertView=layoutInflater.inflate(R.layout.item_news_listview_2,null);
                viewHolder.tvTime= (TextView) convertView.findViewById(R.id.time);
-               viewHolder.tvTitle= (TextView) convertView.findViewById(R.id.title_view);
+               viewHolder.tvTitle= (TextView) convertView.findViewById(R.id.tv_title);
                viewHolder.imageView1= (ImageView) convertView.findViewById(R.id.picture);
                viewHolder.imageView2= (ImageView) convertView.findViewById(R.id.tv_picture2);
                viewHolder.imageView3= (ImageView) convertView.findViewById(R.id.tv_picture3);
