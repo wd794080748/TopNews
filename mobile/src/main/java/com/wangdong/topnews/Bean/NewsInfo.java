@@ -46,6 +46,21 @@ public class NewsInfo {
         }
 
         public static class DataBean {
+            @Override
+            public String toString() {
+                return "DataBean{" +
+                        "uniquekey='" + uniquekey + '\'' +
+                        ", title='" + title + '\'' +
+                        ", date='" + date + '\'' +
+                        ", category='" + category + '\'' +
+                        ", author_name='" + author_name + '\'' +
+                        ", url='" + url + '\'' +
+                        ", thumbnail_pic_s='" + thumbnail_pic_s + '\'' +
+                        ", thumbnail_pic_s02='" + thumbnail_pic_s02 + '\'' +
+                        ", thumbnail_pic_s03='" + thumbnail_pic_s03 + '\'' +
+                        '}';
+            }
+
             private String uniquekey;
             private String title;
             private String date;
