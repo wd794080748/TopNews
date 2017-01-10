@@ -1,16 +1,19 @@
 package com.wangdong.topnews.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.wangdong.topnews.Adapter.FirstPageListViewAdapter;
 import com.wangdong.topnews.Bean.NewsInfo;
 import com.wangdong.topnews.R;
+import com.wangdong.topnews.WebActivity;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -77,6 +80,16 @@ public class NewsFragment extends BaseFragment {
     }
 
     private void initListener() {
+        lvNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String url = dataBeanList.get(position).getUrl();
+                Intent intent =new Intent();
+                intent.putExtra("url",url);
+                intent.setClass(getContext(), WebActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
