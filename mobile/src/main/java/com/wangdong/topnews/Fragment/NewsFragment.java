@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wangdong.topnews.Adapter.FirstPageListViewAdapter;
@@ -95,7 +94,6 @@ public class NewsFragment extends BaseFragment {
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
                 Gson gson=new Gson();
                 NewsInfo newsInfo = gson.fromJson(result, NewsInfo.class);
                 dataBeanList.addAll(newsInfo.getResult().getData());

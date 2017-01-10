@@ -92,6 +92,7 @@ public class MainActivity extends BaseActivity implements FirstPageFragment.OnFr
                 fragmentTransaction.commit();
             }
         });
+        rbHome.setChecked(true);
     }
 
     private void initData() {
