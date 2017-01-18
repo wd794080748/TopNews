@@ -2,13 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     tools:context="com.wangdong.topnews.Fragment.NewsFragment">
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        ptr:ptrDrawable="@drawable/default_ptr_rotate"
+        ptr:ptrAnimationStyle="rotate"
+        ptr:ptrHeaderBackground="#838282"
+        ptr:ptrHeaderTextColor="#FFFFFF"
+        ptr:ptrMode="pullFromStart">
 
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </FrameLayout>

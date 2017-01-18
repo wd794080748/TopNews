@@ -3,6 +3,8 @@ package com.wangdong.topnews.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wangdong.topnews.Adapter.FirstPageListViewAdapter;
 import com.wangdong.topnews.Bean.NewsInfo;
 import com.wangdong.topnews.R;
@@ -40,7 +45,7 @@ public class NewsFragment extends BaseFragment {
     private String mParam2;
     private View view;
     private String type;
-    private ListView lvNews;
+    private PullToRefreshListView lvNews;
     private ArrayList<NewsInfo.ResultBean.DataBean> dataBeanList;
     private FirstPageListViewAdapter firstPageListViewAdapter;
 
@@ -90,11 +95,49 @@ public class NewsFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        lvNews.setOnPullEventListener(new PullToRefreshBase.OnPullEventListener<ListView>() {
+            @Override
+            public void onPullEvent(PullToRefreshBase<ListView> refreshView, PullToRefreshBase.State state, PullToRefreshBase.Mode direction) {
 
-    }
+            }
+        });
+        lvNews.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+
+                Log.e("TAG", "onPullDownToRefresh"); // Do work to
+                dataBeanList.clear();
+                initData();
+                lvNews.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        lvNews.onRefreshComplete();
+                    }
+                }, 500);
+            }
+        });
+        }
+
+
 
     private void initView() {
-        lvNews= (ListView) view.findViewById(R.id.lv_news);
+        lvNews= (PullToRefreshListView) view.findViewById(R.id.lv_news);
+        initRefreshListView();
+    }
+
+    private void initRefreshListView() {
+        ILoadingLayout loadingLayoutProxy = lvNews.getLoadingLayoutProxy();
+        String label = DateUtils.formatDateTime(
+                getContext(),
+                System.currentTimeMillis(),
+                DateUtils.FORMAT_SHOW_TIME
+                        | DateUtils.FORMAT_SHOW_DATE
+                        | DateUtils.FORMAT_ABBREV_ALL);
+        loadingLayoutProxy.setLastUpdatedLabel(label);
+        loadingLayoutProxy.setPullLabel("下拉推荐");
+        loadingLayoutProxy.setRefreshingLabel("正在刷新");
+        loadingLayoutProxy.setReleaseLabel("松开推荐");
     }
 
     private void initData() {
